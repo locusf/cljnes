@@ -7,6 +7,4 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [bytegeist "0.1.0-SNAPSHOT"]
                  ]
-  :profiles {:dev {:dependencies [[speclj "3.3.2"]]}}
-  :plugins [[speclj "3.3.2"]]
   :test-paths ["test"])
