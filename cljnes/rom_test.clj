@@ -1,6 +1,6 @@
-(ns cljnes.core-test
-  (:require [clojure.test :refer [testing deftest is]]
-            [cljnes.core :refer [header-spec ines-spec asBits asBody]]
+(ns cljnes.rom-test
+  (:require [clojure.test :refer [testing deftest is run-tests]]
+            [cljnes.rom :refer [header-spec ines-spec asBits asBody mapper mapper-bits]]
             [clojure.java.io :refer [input-stream copy]]
             [bytegeist.bytegeist :as g])
 
@@ -30,6 +30,11 @@
 (defn flag-to-body [flag] (asBody flag ines-header))
 (def allbits (map flag-to-body [:flags6 :flags7 :flags8 :flags9 :flags10]))
 (def fully-merged-rom (merge-with ines-body (apply merge (map asBits (doall allbits)))))
+(def selected-mapper (mapper fully-merged-rom))
 (deftest rom-added-header
   (testing "ROM expanded header")
-  (is (= true (fully-merged-rom :mirroring))))
+  (is (= true (fully-merged-rom :mirroring)))
+  (is (= "MAPPER 3" selected-mapper))
+  )
+
+(time (run-tests))

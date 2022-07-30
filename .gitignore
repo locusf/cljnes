@@ -13,3 +13,5 @@ pom.xml
 *.iml
 .lsp
 .calva
+.clj-kondo
+*.nes
